@@ -1,0 +1,111 @@
+﻿<Window x:Class="WeatherApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeatherApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="500"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <local:TemperatureConvertToHeight x:Key="tempConvertToHeight"/>
+        <Style TargetType="TextBlock" x:Key="common">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Blue" BasedOn="{StaticResource common}">
+            <Setter Property="Foreground" Value="Blue"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Black" BasedOn="{StaticResource common}">
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="\Images\Newthermometer.png"
+               HorizontalAlignment="Left" 
+               Width="67"/>
+
+        <Rectangle Fill="Red" Height="{Binding MaxTemp,Converter={StaticResource tempConvertToHeight}}" Width="20"
+                   VerticalAlignment="Bottom"
+                   Margin="80 0 15 0"/>
+
+        <StackPanel Grid.Row="1">
+            
+            <TextBlock Text="Max"
+                       Style="{StaticResource Blue}"/>
+            <TextBlock Text="{Binding MaxTemp}" 
+                       Style="{StaticResource Black}"/>
+        </StackPanel>
+
+        <Image Source="\Images\Newthermometer.png"
+       HorizontalAlignment="Left" 
+       Width="67" Grid.Column="1"/>
+
+        <Rectangle Fill="Red" Height="{Binding MinTemp,Converter={StaticResource tempConvertToHeight}}" Width="20"
+           VerticalAlignment="Bottom"
+                   Grid.Column="1"
+                   Margin="80 0 15 0"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            
+            <TextBlock Text="Min"
+                       Style="{StaticResource Blue}"/>
+            <TextBlock Text="{Binding MinTemp}" 
+                       Style="{StaticResource Black}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.RowSpan="2">
+            <TextBlock Text="{Binding City}" Style="{StaticResource Blue}"/>
+            <TextBlock Text="{Binding Date}" Style="{StaticResource Black}"/>
+            <Image Source="{Binding Image}" Margin="5"/>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Text="Temperature" 
+                           Style="{StaticResource Blue}"/>
+                <TextBlock Text="Feels Like" 
+                           Style="{StaticResource Blue}"
+                           Grid.Column="1"/>
+                <TextBlock Text="{Binding Temp}"
+                           Style="{StaticResource Black}"
+                           Grid.Row="1"/>
+                <TextBlock Text="{Binding FeelsLike}" 
+                           Style="{StaticResource Black}"
+                           Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+
+            <TextBlock Text="Wind" Style="{StaticResource Blue }"/>
+            <Image Source="\Images\arrow.png"
+                   Width="50"
+                   Height="50"/>
+
+            <TextBlock Text="{Binding WindSpeed}"
+                       Style="{StaticResource Black}"/>
+
+        </StackPanel>
+
+
+
+
+
+    </Grid>
+</Window>
