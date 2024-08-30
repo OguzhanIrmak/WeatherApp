@@ -41,10 +41,10 @@
                    Margin="80 0 15 0"/>
 
         <StackPanel Grid.Row="1">
-            
+
             <TextBlock Text="Max"
                        Style="{StaticResource Blue}"/>
-            <TextBlock Text="{Binding MaxTemp}" 
+            <TextBlock Text="{Binding MaxTemp,StringFormat={}{0}°C}" 
                        Style="{StaticResource Black}"/>
         </StackPanel>
 
@@ -58,10 +58,10 @@
                    Margin="80 0 15 0"/>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            
+
             <TextBlock Text="Min"
                        Style="{StaticResource Blue}"/>
-            <TextBlock Text="{Binding MinTemp}" 
+            <TextBlock Text="{Binding MinTemp,StringFormat={}{0}°C}" 
                        Style="{StaticResource Black}"/>
         </StackPanel>
 
@@ -79,16 +79,16 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
+
                 <TextBlock Text="Temperature" 
                            Style="{StaticResource Blue}"/>
                 <TextBlock Text="Feels Like" 
                            Style="{StaticResource Blue}"
                            Grid.Column="1"/>
-                <TextBlock Text="{Binding Temp}"
+                <TextBlock Text="{Binding Temp,StringFormat={}{0}°C}"
                            Style="{StaticResource Black}"
                            Grid.Row="1"/>
-                <TextBlock Text="{Binding FeelsLike}" 
+                <TextBlock Text="{Binding FeelsLike,StringFormat={}{0}°C}"
                            Style="{StaticResource Black}"
                            Grid.Row="1" Grid.Column="1"/>
             </Grid>
@@ -96,10 +96,21 @@
             <TextBlock Text="Wind" Style="{StaticResource Blue }"/>
             <Image Source="\Images\arrow.png"
                    Width="50"
-                   Height="50"/>
+                   Height="50" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="{Binding Direction }"/>
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
 
-            <TextBlock Text="{Binding WindSpeed}"
+            <TextBlock Text="{Binding WindSpeed,StringFormat={}{0}m/s}"
                        Style="{StaticResource Black}"/>
+            <TextBlock Text="{Binding DirectionName}"
+                       Style="{StaticResource Blue}"/>
 
         </StackPanel>
 
