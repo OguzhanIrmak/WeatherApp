@@ -45,8 +45,20 @@ These styles are applied to various text elements to ensure consistent UI design
 Weather icons from the OpenWeatherMap API are dynamically displayed using the Image control.
 Other images, such as thermometers and arrows, are also included in the UI via XAML.
 
+7-Changes Made:
 
-![Ekran görüntüsü 2024-08-31 004818](https://github.com/user-attachments/assets/08295c6f-26be-4ce6-8287-3bab938f18da)
+- Use of BeginInvoke: The Dispatcher.BeginInvoke method has been added to the asynchronous GetWeather method to ensure that user interface updates are performed on the UI thread. This change helps to make UI updates smoother and more error-free.
+  
+8-New Features:
+
+- City List Loading: The LoadCitiesFromTxt method reads cities from a file and adds them to the CityList collection.
+- Weather Retrieval: The GetWeather method fetches and processes weather data for the selected city from the API and displays it on the screen.
+- Weather Visualization: Weather data, including direction, temperature, and wind speed, is visualized and displayed.
+
+
+
+
+![Ekran görüntüsü 2024-09-02 172319](https://github.com/user-attachments/assets/d317ef1b-80ec-4fd6-b270-36cd1c02c8f2)
 
 
 
