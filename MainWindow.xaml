@@ -6,10 +6,12 @@
         xmlns:local="clr-namespace:WeatherApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="500"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="WhiteSmoke">
 
     <Window.Resources>
         <local:TemperatureConvertToHeight x:Key="tempConvertToHeight"/>
+        <local:UriToImageSourceConverter x:Key="uriToImage"/>
         <Style TargetType="TextBlock" x:Key="common">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="TextAlignment" Value="Center"/>
@@ -46,6 +48,33 @@
                        Style="{StaticResource Blue}"/>
             <TextBlock Text="{Binding MaxTemp,StringFormat={}{0}°C}" 
                        Style="{StaticResource Black}"/>
+
+            <ListBox VerticalAlignment="Bottom"
+                     Width="120"
+                     Height="200"
+                     Margin="5 40"
+                     x:Name="CityListBox"
+                     ItemsSource="{Binding CityList}"
+                     Style="{StaticResource ListBox}">
+                <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="Margin" Value="2"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="DarkBlue"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+
+
+
+
         </StackPanel>
 
         <Image Source="\Images\Newthermometer.png"
@@ -63,12 +92,24 @@
                        Style="{StaticResource Blue}"/>
             <TextBlock Text="{Binding MinTemp,StringFormat={}{0}°C}" 
                        Style="{StaticResource Black}"/>
+
+            <Button Content="Show" Height="50" Width="100"
+                    Margin="0 100"
+                    Click="Button_Click"
+                    Style="{StaticResource Button}" 
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"/>
         </StackPanel>
 
         <StackPanel Grid.Column="2" Grid.RowSpan="2">
             <TextBlock Text="{Binding City}" Style="{StaticResource Blue}"/>
             <TextBlock Text="{Binding Date}" Style="{StaticResource Black}"/>
-            <Image Source="{Binding Image}" Margin="5"/>
+            <Image Source="{Binding Image,Converter={StaticResource uriToImage}}" Margin="5"
+                   Height="100"
+                   Width="100"/>
 
             <Grid>
                 <Grid.RowDefinitions>
